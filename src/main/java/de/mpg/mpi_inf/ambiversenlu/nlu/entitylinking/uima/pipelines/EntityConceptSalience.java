@@ -50,8 +50,10 @@ public class EntityConceptSalience extends Pipeline  {
       addstep("DE", Component.DE_TOKENIZER.name());
       addstep(Component.DE_TOKENIZER.name(), Component.DE_POS.name());
       addstep(Component.DE_POS.name(), Component.DE_LEMMATIZER.name());
-      addstep(Component.DE_LEMMATIZER.name(), Component.DE_KNOW_NER_KB.name());
-      addstep(Component.DE_KNOW_NER_KB.name(), Component.DE_NER.name());
+      addstep(Component.DE_LEMMATIZER.name(), Component.KNOW_NER_NED.name());
+      addstep(Component.KNOW_NER_NED.name(), Component.DE_NER.name());
+    //   addstep(Component.DE_LEMMATIZER.name(), Component.DE_KNOW_NER_KB.name());
+    //   addstep(Component.DE_KNOW_NER_KB.name(), Component.DE_NER.name());
       addstep(Component.DE_NER.name(), Component.DE_NER2.name());
       addstep(Component.DE_NER2.name(), Component.AIDA_NO_RESULTS.name());
       addstep(Component.AIDA_NO_RESULTS.name(), Component.CONCEPT_SPOTTER_EXACT.name());
