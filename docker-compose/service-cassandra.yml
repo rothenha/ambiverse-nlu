@@ -15,7 +15,7 @@ services:
       DATABASE_NAME: aida_20180120_cs_de_en_es_ru_zh_v18
 
   nlu:
-    image: ambiverse/ambiverse-nlu
+    image: rothenha/ambiverse-nlu
     restart: always
     depends_on:
       - db
