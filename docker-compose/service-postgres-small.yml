@@ -11,7 +11,7 @@ services:
       POSTGRES_USER: ambiversenlu
 
   nlu:
-    image: ambiverse/ambiverse-nlu
+    image: localhost:50000/ambiverse-nlu-local
     restart: always
     depends_on:
       - db

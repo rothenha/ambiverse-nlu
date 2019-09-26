@@ -16,7 +16,7 @@ services:
       CASSANDRA_SEEDS: db,db1
 
   nlu:
-    image: ambiverse/ambiverse-nlu
+    image: localhost:50000/ambiverse-nlu-local
     restart: always
     depends_on:
       - db
