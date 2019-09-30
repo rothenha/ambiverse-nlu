@@ -28,7 +28,7 @@ public class KnowNERSettings {
     private static KnowNERSettings instance;
 
     private static final Logger logger = LoggerFactory.getLogger(KnowNERSettings.class);
-    private static final Pattern MODEL_TITLE_PATTERN = Pattern.compile("(.+?_)?(.+?)_(.+?)_(.+?)_(.+?)(?:_(.+?))?_(.+)");
+    private static final Pattern MODEL_TITLE_PATTERN = Pattern.compile("(.+?_)?(.+?)_(.+?)_(.+?)_(TEST|DEV)(?:_(.+?))?_(.+)");
 
 //    hacky things for debugging...
     private final Integer mentionTokenFrequencyCountsLimit;
@@ -88,10 +88,6 @@ public class KnowNERSettings {
         if(loadFromClassPath) { //If the models are stored in the classpath, get the classpath as a folder
             modelsPath =  ResourceUtils.getClasspathAsFolder(classPathModelsPathForDump, true).getPath();
             logger.debug("Transforming classpath {} to directory {}.", classPathModelsPathForDump, modelsPath);
-            logger.info("Transforming models classpath {} to directory {}.", classPathGeneretatedResourcesLocForDump, modelsPath);
-        }
-        else {
-            logger.info("Models not in classpath.");
         }
 
         Map<String, Map<String, Path>> modelPathsMap_;
@@ -109,10 +105,7 @@ public class KnowNERSettings {
         String langResourcesLocation = properties.getProperty("lang_resources_location");
         if(loadFromClassPath) {
             langResourcesLocation = ResourceUtils.getClasspathAsFolder(classPathGeneretatedResourcesLocForDump, true).getPath();
-            logger.info("Transforming classpath {} to directory {}.", classPathGeneretatedResourcesLocForDump, langResourcesLocation);
-        }
-        else {
-            logger.info("Language resources not in classpath.");
+            logger.debug("Transforming classpath {} to directory {}.", classPathGeneretatedResourcesLocForDump, langResourcesLocation);
         }
 
         this.langResourcesLocation = langResourcesLocation + (langResourcesLocation.endsWith("/")? "" : "/");
@@ -188,7 +181,6 @@ public class KnowNERSettings {
 
     public static String parseCorpusFromModelTitle(String modelTitle) {
         String[] split = parseModelTitle(modelTitle);
-        logger.info("parsed corpus file name: {}", Arrays.toString(split));
 		return split[1];
 	}
 
