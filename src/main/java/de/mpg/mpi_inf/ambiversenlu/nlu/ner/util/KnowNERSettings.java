@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -101,7 +102,7 @@ public class KnowNERSettings {
             modelPathsMap_ = null;
         }
         modelPathsMap = modelPathsMap_;
-
+        logger.info("modelPathsMap = {}", modelPathsMap.toString())
 
         this.keyspacePattern = properties.getProperty("keyspace_pattern");
 
@@ -186,7 +187,8 @@ public class KnowNERSettings {
 	}
 
     public static String parseCorpusFromModelTitle(String modelTitle) {
-		String[] split = parseModelTitle(modelTitle);
+        String[] split = parseModelTitle(modelTitle);
+        logger.info(String.format("parsed corpus file name: {}", Arrays.toString(split)));
 		return split[1];
 	}
 
