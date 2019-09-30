@@ -188,7 +188,7 @@ public class KnowNERSettings {
 
     public static String parseCorpusFromModelTitle(String modelTitle) {
         String[] split = parseModelTitle(modelTitle);
-        logger.info(String.format("parsed corpus file name: {}", Arrays.toString(split)));
+        logger.info("parsed corpus file name: {}", Arrays.toString(split));
 		return split[1];
 	}
 
