@@ -87,6 +87,10 @@ public class KnowNERSettings {
         if(loadFromClassPath) { //If the models are stored in the classpath, get the classpath as a folder
             modelsPath =  ResourceUtils.getClasspathAsFolder(classPathModelsPathForDump, true).getPath();
             logger.debug("Transforming classpath {} to directory {}.", classPathModelsPathForDump, modelsPath);
+            logger.info("Transforming models classpath {} to directory {}.", classPathGeneretatedResourcesLocForDump, modelsPath);
+        }
+        else {
+            logger.info("Models not in classpath.");
         }
 
         Map<String, Map<String, Path>> modelPathsMap_;
@@ -103,8 +107,11 @@ public class KnowNERSettings {
 
         String langResourcesLocation = properties.getProperty("lang_resources_location");
         if(loadFromClassPath) {
-            langResourcesLocation =  ResourceUtils.getClasspathAsFolder(classPathGeneretatedResourcesLocForDump, true).getPath();
-            logger.debug("Transforming classpath {} to directory {}.", classPathGeneretatedResourcesLocForDump, langResourcesLocation);
+            langResourcesLocation = ResourceUtils.getClasspathAsFolder(classPathGeneretatedResourcesLocForDump, true).getPath();
+            logger.info("Transforming classpath {} to directory {}.", classPathGeneretatedResourcesLocForDump, langResourcesLocation);
+        }
+        else {
+            logger.info("Language resources not in classpath.");
         }
 
         this.langResourcesLocation = langResourcesLocation + (langResourcesLocation.endsWith("/")? "" : "/");
