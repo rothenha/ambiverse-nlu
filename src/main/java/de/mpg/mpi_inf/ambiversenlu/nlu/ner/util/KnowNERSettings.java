@@ -98,7 +98,6 @@ public class KnowNERSettings {
             modelPathsMap_ = null;
         }
         modelPathsMap = modelPathsMap_;
-        logger.info("modelPathsMap = {}", modelPathsMap.toString());
 
         this.keyspacePattern = properties.getProperty("keyspace_pattern");
 
