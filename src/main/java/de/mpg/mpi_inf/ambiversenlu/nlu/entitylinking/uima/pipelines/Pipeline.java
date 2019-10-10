@@ -18,8 +18,8 @@ public abstract class Pipeline {
   abstract Set<Language> supportedLanguages();
   void addstep(String previous, String next) {
     if(steps.containsKey(previous) && !steps.get(previous).equals(next)) {
-      throw new IllegalArgumentException("The next step of a given previous step must be unique. You tried to include next step"
-          + next + " to" + previous + " in Pipeline " + ", but it aleady contained " + steps.get(previous));
+      throw new IllegalArgumentException("The next step of a given previous step must be unique. You tried to include next step "
+          + next + " to " + previous + " in Pipeline " + ", but it aleady contained " + steps.get(previous));
     }
     steps.put(previous, next);
   }

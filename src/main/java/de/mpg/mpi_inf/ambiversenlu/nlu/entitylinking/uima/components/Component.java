@@ -89,8 +89,13 @@ public enum Component {
   FILTER_CONCEPTS_BY_CATS(FilterConceptsByCategories.class, FilterConceptsByCategories.FILTER_NEs, false),//Filter concepts not containing top Categories (Joint).
   FILTER_CONCEPTS_BY_DOMAIN_WORDS_NEs(FilterConceptsByDomainWords.class, FilterConceptsByDomainWords.FILTER_NEs, true),//Filter NEs and concepts not in Domain Words of NEs.
   FILTER_CONCEPTS_BY_DOMAIN_WORDS(FilterConceptsByDomainWords.class, FilterConceptsByDomainWords.FILTER_NEs, false), //Filter concepts not in Domain Words of NEs.
-  PREPROCESSED_READER(PreProcessedReader.class);
-
+  EN_PREPROCESSED_READER(PreProcessedReader.class),
+  ZH_PREPROCESSED_READER(PreProcessedReader.class),
+  RU_PREPROCESSED_READER(PreProcessedReader.class),
+  CS_PREPROCESSED_READER(PreProcessedReader.class),
+  DE_PREPROCESSED_READER(PreProcessedReader.class),
+  ES_PREPROCESSED_READER(PreProcessedReader.class),
+  FR_PREPROCESSED_READER(PreProcessedReader.class);
 
   public Class<? extends JCasAnnotator_ImplBase> component;
 
