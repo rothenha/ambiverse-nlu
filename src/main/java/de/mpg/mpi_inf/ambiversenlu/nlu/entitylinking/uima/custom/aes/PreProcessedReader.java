@@ -20,9 +20,7 @@ public class PreProcessedReader extends JCasAnnotator_ImplBase {
         int nOffsetSentenceStart = 0;
         for (String strToken: vTokenLines) {          
             if ( strToken.equals("") ) { // empty line: end of sentence
-              int nSentenceStart = nOffsetSentenceStart;
-              int nSentenceEnd = nOffsetLine;
-              Sentence sentence = new Sentence(aJCas, nSentenceStart, nSentenceEnd);
+              Sentence sentence = new Sentence(aJCas, nOffsetSentenceStart, nOffsetLine);
               sentence.addToIndexes();
 
               nOffsetLine++;
@@ -40,9 +38,13 @@ public class PreProcessedReader extends JCasAnnotator_ImplBase {
               token.addToIndexes();
 
               nOffsetLine += strToken.length() + 1;
-          }        
+          }
         }
 
+        if ( nOffsetSentenceStart < nOffsetLine ) {
+              Sentence sentence = new Sentence(aJCas, nOffsetSentenceStart, nOffsetLine);
+              sentence.addToIndexes();
+        }
     }
 
 }
