@@ -228,6 +228,11 @@
                         <descriptor>${project.basedir}/src/main/java/de/mpg/mpi_inf/ambiversenlu/nlu/entitylinking/service/web/webapp/WEB-INF/web.xml</descriptor>
                         <contextPath>/</contextPath>
                     </webApp>
+                    <reload>automatic</reload>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <scanTargets>
+                        <scanTarget>target/classes</scanTarget>
+                    </scanTargets>
                 </configuration>
                 <dependencies>
                     <dependency>
