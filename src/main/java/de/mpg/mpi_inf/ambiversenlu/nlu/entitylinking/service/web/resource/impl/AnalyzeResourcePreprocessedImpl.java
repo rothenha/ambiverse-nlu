@@ -42,7 +42,7 @@ public class AnalyzeResourcePreprocessedImpl implements AnalyzeResourcePreproces
   private static int errorCounter = 0;
 
   public AnalyzeResourcePreprocessedImpl() throws EntityLinkingDataAccessException {
-    EntityLinkingManager.init();
+    // EntityLinkingManager.init();
     //Formatting the date to RFC3339 for Filebeat to use the timestamp from here instead of when the file was read
     LoggerFactory.setDateFormatString("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
     requestLogger = LoggerFactory.getLogger("requestLogger");
