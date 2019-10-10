@@ -1,0 +1,53 @@
+package de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.uima.pipelines;
+
+import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.config.EntityLinkingConfig;
+import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.uima.components.Component;
+import de.mpg.mpi_inf.ambiversenlu.nlu.language.Language;
+
+import java.util.Set;
+
+public class EntitySalienceStanfordPreprocessed extends Pipeline {
+  
+  @Override void addSteps() {
+    addstep("first", Component.LANGUAGE_IDENTIFICATION.name());
+    for (Language language : supportedLanguages()) {
+      if (language.isGerman()) {
+        generateGermanSteps();
+      } else if (language.isChinese()) {
+        generateChineseSteps();
+      } else if (EntityLinkingConfig.getLanguages().contains(language.name())) {
+        String upperCaseLanguage = language.name().toUpperCase();
+        String next = Component.PREPROCESSED_READER.name();
+        addstep(upperCaseLanguage, next);
+
+        addstep(next, upperCaseLanguage + "_POS");
+        addstep(upperCaseLanguage + "_POS", upperCaseLanguage + "_NER");
+        addstep(upperCaseLanguage + "_NER", Component.AIDA_NO_RESULTS.name());
+        addstep(Component.AIDA_NO_RESULTS.name(), Component.SALIENCE.name());
+      } else {
+        throw new UnsupportedOperationException("Language " + language + " is not supported!");
+      }
+    }
+  }
+
+  @Override public Set<Language> supportedLanguages() {
+    return PipelineUtil.getStanfordSupportedLanguages();
+  }
+
+  private void generateGermanSteps() {
+    addstep("DE", Component.PREPROCESSED_READER.name());
+    addstep(Component.PREPROCESSED_READER.name(), Component.DE_POS.name());
+    addstep(Component.DE_POS.name(), Component.DE_NER.name());
+    addstep(Component.DE_NER.name(), Component.DE_NER2.name());
+    addstep(Component.DE_NER2.name(), Component.AIDA_NO_RESULTS.name());
+    addstep(Component.AIDA_NO_RESULTS.name(), Component.SALIENCE.name());
+  }
+
+  private void generateChineseSteps() {
+    addstep("ZH", Component.PREPROCESSED_READER.name());
+    addstep(Component.PREPROCESSED_READER.name(), Component.ZH_POS.name());
+    addstep(Component.ZH_POS.name(), Component.ZH_NER.name());
+    addstep(Component.ZH_NER.name(), Component.AIDA_NO_RESULTS.name());
+    addstep(Component.AIDA_NO_RESULTS.name(), Component.SALIENCE.name());
+  }
+}

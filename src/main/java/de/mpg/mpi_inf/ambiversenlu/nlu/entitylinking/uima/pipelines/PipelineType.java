@@ -1,17 +1,18 @@
 package de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.uima.pipelines;
 
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.uima.UIMAException;
+
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.access.EntityLinkingDataAccessException;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.graph.similarity.exception.MissingSettingException;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.processor.DocumentProcessor;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.processor.UnprocessableDocumentException;
 import de.mpg.mpi_inf.ambiversenlu.nlu.language.Language;
 import de.mpg.mpi_inf.ambiversenlu.nlu.model.Document;
-import org.apache.uima.UIMAException;
-
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 public enum PipelineType {
   DUMMY(new DummyPipeline()),
@@ -31,6 +32,10 @@ public enum PipelineType {
   ENTITY_SALIENCE_STANFORD(new EntitySalienceStanford()),
   ENTITY_CONCEPT_SALIENCE(new EntityConceptSalience()),
   ENTITY_CONCEPT_SALIENCE_STANFORD(new EntityConceptSalienceStanford()),
+  PREPROCESSED_ENTITY_SALIENCE(new EntitySalience()),
+  PREPROCESSED_ENTITY_SALIENCE_STANFORD(new EntitySalienceStanford()),
+  PREPROCESSED_ENTITY_CONCEPT_SALIENCE(new EntityConceptSaliencePreprocessed()),
+  PREPROCESSED_ENTITY_CONCEPT_SALIENCE_STANFORD(new EntityConceptSalienceStanford()),
   FACTS_WITH_SALIENCE_EN(new FactsWithSalience()),
   FACTS_WITH_SALIENCE_EN_STANFORD(new FactsWithSalienceStanford()),
   FACT_ENTITY_CONCEPT_SALIENCE(new FactsEntityConceptSalience()),

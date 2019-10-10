@@ -7,7 +7,7 @@ import de.mpg.mpi_inf.ambiversenlu.nlu.ner.util.KnowNERLanguage;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EntitySalience extends Pipeline  {
+public class EntitySaliencePreprocessed extends Pipeline  {
 
     @Override void addSteps() {
         addstep("first", Component.LANGUAGE_IDENTIFICATION.name());
@@ -18,10 +18,10 @@ public class EntitySalience extends Pipeline  {
                 generateChineseSteps();
             } else if (KnowNERLanguage.supports(language)) {
                 String upperCaseLanguage = language.name().toUpperCase();
-                addstep(upperCaseLanguage, upperCaseLanguage + "_TOKENIZER");
+                addstep(upperCaseLanguage, Component.PREPROCESSED_READER.name());
 
                 String next = upperCaseLanguage + "_POS";
-                addstep(upperCaseLanguage + "_TOKENIZER", next);
+                addstep(Component.PREPROCESSED_READER.name(), next);
 
                 if (KnowNERLanguage.requiresLemma(language)) {
                     addstep(next, upperCaseLanguage + "_LEMMATIZER");
@@ -42,8 +42,8 @@ public class EntitySalience extends Pipeline  {
     }
 
     private void generateGermanSteps() {
-        addstep("DE", Component.DE_TOKENIZER.name());
-        addstep(Component.DE_TOKENIZER.name(), Component.DE_POS.name());
+        addstep("DE", Component.PREPROCESSED_READER.name());
+        addstep(Component.PREPROCESSED_READER.name(), Component.DE_POS.name());
         addstep(Component.DE_POS.name(), Component.DE_LEMMATIZER.name());
         // addstep(Component.DE_LEMMATIZER.name(), Component.KNOW_NER_NED.name());
         // addstep(Component.KNOW_NER_NED.name(), Component.DE_NER.name());
@@ -55,8 +55,8 @@ public class EntitySalience extends Pipeline  {
     }
 
     private void generateChineseSteps() {
-        addstep("ZH", Component.ZH_TOKENIZER.name());
-        addstep(Component.ZH_TOKENIZER.name(), Component.ZH_POS.name());
+        addstep("ZH", Component.PREPROCESSED_READER.name());
+        addstep(Component.PREPROCESSED_READER.name(), Component.ZH_POS.name());
         addstep(Component.ZH_POS.name(), Component.ZH_NER.name());
         addstep(Component.ZH_NER.name(), Component.AIDA_USE_RESULTS.name());
         addstep(Component.AIDA_USE_RESULTS.name(), Component.SALIENCE.name());
