@@ -14,6 +14,7 @@ import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.model.AnalyzeOu
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.model.MessageResponse;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.model.Meta;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.AnalyzeResource;
+import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.AnalyzeResourcePreprocessed;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.utils.AnalyzeInputUtils;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.uima.pipelines.PipelineType;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.util.OutputUtilsPreprocessed;
@@ -29,7 +30,7 @@ import java.util.Set;
 /**
  * Main Web Service class for the Entity Linking API.
  */
-public class AnalyzeResourcePreprocessedImpl implements AnalyzeResource {
+public class AnalyzeResourcePreprocessedImpl implements AnalyzeResourcePreprocessed {
 
   @Context
   HttpServletRequest req;
@@ -91,7 +92,7 @@ public class AnalyzeResourcePreprocessedImpl implements AnalyzeResource {
       logger.field("response", elo);
       logger.log();
 
-      return AnalyzeResource.PostAnalyzeResponse.withJsonOK(elo);
+      return AnalyzeResourcePreprocessed.PostAnalyzeResponse.withJsonOK(elo);
     } catch (UnprocessableDocumentException e) {
       // For exceptions that occur in the analysis engine, we need to return the root cause.
       MessageResponse messageResponse = new MessageResponse();
@@ -111,7 +112,7 @@ public class AnalyzeResourcePreprocessedImpl implements AnalyzeResource {
       logger.field("error", messageResponse);
       logger.log();
 
-      return AnalyzeResource.PostAnalyzeResponse.withJsonInternalServerError(messageResponse);
+      return AnalyzeResourcePreprocessed.PostAnalyzeResponse.withJsonInternalServerError(messageResponse);
 
     } catch (AnalysisEngineProcessException e) {
       // For exceptions that occur in the analysis engine, we need to return the root cause.
@@ -132,7 +133,7 @@ public class AnalyzeResourcePreprocessedImpl implements AnalyzeResource {
       logger.field("error", messageResponse);
       logger.log();
 
-      return AnalyzeResource.PostAnalyzeResponse.withJsonInternalServerError(messageResponse);
+      return AnalyzeResourcePreprocessed.PostAnalyzeResponse.withJsonInternalServerError(messageResponse);
     } catch (Exception e) {
       // The default exception handler.
       MessageResponse messageResponse = new MessageResponse();
@@ -153,7 +154,7 @@ public class AnalyzeResourcePreprocessedImpl implements AnalyzeResource {
       logger.field("error", messageResponse);
       logger.log();
 
-      return AnalyzeResource.PostAnalyzeResponse.withJsonInternalServerError(messageResponse);
+      return AnalyzeResourcePreprocessed.PostAnalyzeResponse.withJsonInternalServerError(messageResponse);
     }
   }
 
