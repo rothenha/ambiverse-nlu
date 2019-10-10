@@ -179,7 +179,7 @@ public class Mentions implements Serializable {
     mentions.add(new Mentions());
     mentions.add(new Mentions());
     for (NamedEntity ne : select(jCas, NamedEntity.class)) {
-      Mention mention = new Mention(ne.getCoveredText(), ne.getCoveredText().replaceAll("\n", " "), ne.getBegin(), ne.getEnd(), ne.getBegin(), ne.getEnd(), 0);
+      Mention mention = new Mention(ne.getCoveredText().replaceAll("\n", " "), ne.getBegin(), ne.getEnd(), ne.getBegin(), ne.getEnd(), 0);
       mention.setCharOffset(ne.getBegin());
       mention.setCharLength(ne.getEnd() - ne.getBegin());
       if (ne.getValue() != null && (ne.getValue().equals("manual"))) {
