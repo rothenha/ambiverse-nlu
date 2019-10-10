@@ -22,7 +22,7 @@
         <init-param>
             <param-name>jersey.config.server.provider.classnames</param-name>
             <param-value>
-                de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.impl.AnalyzeResourceImpl;de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.impl.AnalyzeResourceWithFactsImpl
+                de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.impl.AnalyzeResourceImpl;de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.impl.AnalyzeResourceWithFactsImpl;de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.impl.AnalyzeResourcePreprocessedImpl
             </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
@@ -61,6 +61,7 @@
     <filter-mapping>
         <filter-name>QoSFilter</filter-name>
         <url-pattern>/analyze</url-pattern>
+        <url-pattern>/analyzepreprocessed</url-pattern>
         <!--<url-pattern>/analyzeWithFacts</url-pattern>-->
     </filter-mapping>
 </web-app>
