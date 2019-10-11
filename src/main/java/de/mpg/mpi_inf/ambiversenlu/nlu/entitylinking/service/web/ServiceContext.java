@@ -31,9 +31,8 @@ public class ServiceContext implements ServletContextListener {
   }
 
   @Override public void contextInitialized(ServletContextEvent arg0) {
-    try {
       logger_.info("Initializing the Entity Linking Manager");
-      EntityLinkingManager.init();
+      // EntityLinkingManager.init();
       //This is for VW to avoid generating facts with appositions
       try {
         Options options = new Options();
@@ -44,23 +43,8 @@ public class ServiceContext implements ServletContextListener {
       }
       Options.processAppositions = false;
 
-      logger_.info("Firing dummy calls to load the caches.");
-      AnalyzeResourcePreprocessedImpl.getSaliencePipelineByNerConfig().dummyCall();
-      AnalyzeResourcePreprocessedImpl.getConceptSaliencePipelineByNerConfig().dummyCall();
-    } catch (EntityLinkingDataAccessException e) {
-      throw new RuntimeException(e);
-    } catch (MissingSettingException e) {
-      throw new RuntimeException(e);
-    } catch (NoSuchMethodException e) {
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    } catch (UnprocessableDocumentException e) {
-      throw new RuntimeException(e);
-    } catch (ClassNotFoundException e) {
-      throw new RuntimeException(e);
-    } catch (UIMAException e) {
-      throw new RuntimeException(e);
-    }
+      logger_.info("NOT Firing dummy calls to load the caches.");
+      // AnalyzeResourcePreprocessedImpl.getSaliencePipelineByNerConfig().dummyCall();
+      // AnalyzeResourcePreprocessedImpl.getConceptSaliencePipelineByNerConfig().dummyCall();
   }
 }
