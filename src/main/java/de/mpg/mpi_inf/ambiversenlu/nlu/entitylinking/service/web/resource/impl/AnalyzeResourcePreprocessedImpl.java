@@ -75,6 +75,7 @@ public class AnalyzeResourcePreprocessedImpl implements AnalyzeResourcePreproces
       long time = System.currentTimeMillis();
       // Process the input document with the document processor.
       Document doc = AnalyzeInputUtils.getDocumentFromPreprocessedAnalyzeInput(input);
+      
       PipelineType pipelineType;
       if (input.getExtractConcepts() != null && input.getExtractConcepts()) {
           pipelineType = getConceptSaliencePipelineByNerConfig();
