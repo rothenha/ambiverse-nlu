@@ -4,7 +4,9 @@ import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.EntityLinkingManager;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.access.EntityLinkingDataAccessException;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.graph.similarity.exception.MissingSettingException;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.processor.UnprocessableDocumentException;
+import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.AnalyzeResourcePreprocessed;
 import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.impl.AnalyzeResourceImpl;
+import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.service.web.resource.impl.AnalyzeResourcePreprocessedImpl;
 import de.mpg.mpi_inf.ambiversenlu.nlu.openie.clausie.Options;
 import org.apache.uima.UIMAException;
 import org.slf4j.Logger;
@@ -43,8 +45,8 @@ public class ServiceContext implements ServletContextListener {
       Options.processAppositions = false;
 
       logger_.info("Firing dummy calls to load the caches.");
-      AnalyzeResourceImpl.getSaliencePipelineByNerConfig().dummyCall();
-      AnalyzeResourceImpl.getConceptSaliencePipelineByNerConfig().dummyCall();
+      AnalyzeResourcePreprocessedImpl.getSaliencePipelineByNerConfig().dummyCall();
+      AnalyzeResourcePreprocessedImpl.getConceptSaliencePipelineByNerConfig().dummyCall();
     } catch (EntityLinkingDataAccessException e) {
       throw new RuntimeException(e);
     } catch (MissingSettingException e) {

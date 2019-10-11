@@ -18,8 +18,7 @@ public class EntityConceptSaliencePreprocessed extends Pipeline {
             generateChineseSteps();
         } else if (KnowNERLanguage.supports(language)){
             String upperCaseLanguage = language.name().toUpperCase();
-            String next = upperCaseLanguage + "_PREPROCESSED_READER";
-            addstep(upperCaseLanguage, next);
+            String next = upperCaseLanguage;
 
             if (KnowNERLanguage.requiresLemma(language)) {
                 addstep(next, upperCaseLanguage + "_LEMMATIZER");
@@ -44,8 +43,7 @@ public class EntityConceptSaliencePreprocessed extends Pipeline {
   }
 
   private void generateChineseSteps() {
-      addstep("ZH", Component.ZH_PREPROCESSED_READER.name());
-      addstep(Component.ZH_PREPROCESSED_READER.name(), Component.ZH_POS.name());
+      addstep("ZH", Component.ZH_POS.name());
       addstep(Component.ZH_POS.name(), Component.ZH_NER.name());
       addstep(Component.ZH_NER.name(), Component.AIDA_NO_RESULTS.name());
       addstep(Component.AIDA_NO_RESULTS.name(), Component.CONCEPT_SPOTTER_EXACT.name());
@@ -55,8 +53,7 @@ public class EntityConceptSaliencePreprocessed extends Pipeline {
   }
 
   private void generateGermanSteps() {
-      addstep("DE", Component.DE_PREPROCESSED_READER.name());
-      addstep(Component.DE_PREPROCESSED_READER.name(), Component.DE_POS.name());
+      addstep("DE", Component.DE_POS.name());
       addstep(Component.DE_POS.name(), Component.DE_LEMMATIZER.name());
       addstep(Component.DE_LEMMATIZER.name(), Component.KNOW_NER_NED.name());
       addstep(Component.KNOW_NER_NED.name(), Component.DE_NER.name());

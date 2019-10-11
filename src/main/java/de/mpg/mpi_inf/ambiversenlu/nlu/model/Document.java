@@ -7,10 +7,15 @@ import de.mpg.mpi_inf.ambiversenlu.nlu.entitylinking.uima.type.AidaDocumentSetti
 import de.mpg.mpi_inf.ambiversenlu.nlu.language.Language;
 import de.mpg.mpi_inf.ambiversenlu.nlu.model.util.DocumentAnnotations;
 import de.tudarmstadt.ukp.dkpro.core.api.metadata.type.DocumentMetaData;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Sentence;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.Token;
+import de.tudarmstadt.ukp.dkpro.core.api.segmentation.type.TokenForm;
+
 import org.apache.uima.jcas.JCas;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import static org.apache.uima.fit.util.JCasUtil.exists;
 
@@ -31,6 +36,10 @@ public class Document implements Serializable {
   private String id;
 
   private String text;
+
+  private List<Integer> lstSentenceOffsets = null;
+
+  private List<Integer> lstTokenOffsets = null;
 
   private DocumentAnnotations annotations;
 
@@ -233,5 +242,35 @@ public class Document implements Serializable {
       md.setDocumentId(ads.getDocumentId());
       md.addToIndexes();
     }
+
+    if ( this.lstTokenOffsets != null ) {
+      for (int i = 0; i < this.lstTokenOffsets.size(); i += 2) {
+        int nTokenStart = lstTokenOffsets.get(i);
+        int nTokenEnd = lstTokenOffsets.get(i+1);
+
+        Token token = new Token(jcas, nTokenStart, nTokenEnd);
+        TokenForm tokenForm = new TokenForm(jcas, nTokenStart, nTokenEnd);
+        tokenForm.setValue(token.getCoveredText());
+        token.setForm(tokenForm);
+
+        token.addToIndexes();        
+      }
+    }
+    
+    if ( this.lstSentenceOffsets != null ) {
+      for (int i = 0; i < this.lstSentenceOffsets.size(); i += 2) {
+        Sentence sentence = new Sentence(jcas, lstSentenceOffsets.get(i), lstSentenceOffsets.get(i+1));
+        sentence.addToIndexes();
+      }
+    }
+
+  }
+
+  public void addSentenceOffset(List<Integer> lstSentenceOffsets) {
+    this.lstSentenceOffsets = lstSentenceOffsets;
+  }
+
+  public void addTokenOffsets(List<Integer> lstTokenOffsets) {
+    this.lstTokenOffsets = lstTokenOffsets;
   }
 }

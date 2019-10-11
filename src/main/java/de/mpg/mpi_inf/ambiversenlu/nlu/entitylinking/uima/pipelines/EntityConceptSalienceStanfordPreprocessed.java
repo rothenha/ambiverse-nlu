@@ -16,9 +16,7 @@ public class EntityConceptSalienceStanfordPreprocessed extends Pipeline {
         generateChineseSteps();
       } else if (EntityLinkingConfig.getLanguages().contains(language.name())) {
         String upperCaseLanguage = language.name().toUpperCase();
-        String next = upperCaseLanguage + "_PREPROCESSED_READER";
-        addstep(upperCaseLanguage, next);
-
+        String next = upperCaseLanguage;
 
         addstep(next, upperCaseLanguage + "_POS");
         addstep(upperCaseLanguage + "_POS", upperCaseLanguage + "_NER");
@@ -39,8 +37,7 @@ public class EntityConceptSalienceStanfordPreprocessed extends Pipeline {
   }
 
   private void generateGermanSteps() {
-    addstep("DE", Component.DE_PREPROCESSED_READER.name());
-    addstep(Component.DE_PREPROCESSED_READER.name(), Component.DE_POS.name());
+    addstep("DE", Component.DE_POS.name());
     addstep(Component.DE_POS.name(), Component.DE_NER.name());
     addstep(Component.DE_NER.name(), Component.DE_NER2.name());
     addstep(Component.DE_NER2.name(), Component.AIDA_NO_RESULTS.name());
@@ -51,8 +48,7 @@ public class EntityConceptSalienceStanfordPreprocessed extends Pipeline {
   }
 
   private void generateChineseSteps() {
-    addstep("ZH", Component.ZH_PREPROCESSED_READER.name());
-    addstep(Component.ZH_PREPROCESSED_READER.name(), Component.ZH_POS.name());
+    addstep("ZH", Component.ZH_POS.name());
     addstep(Component.ZH_POS.name(), Component.ZH_NER.name());
     addstep(Component.ZH_NER.name(), Component.AIDA_NO_RESULTS.name());
     addstep(Component.AIDA_NO_RESULTS.name(), Component.CONCEPT_SPOTTER_EXACT.name());
