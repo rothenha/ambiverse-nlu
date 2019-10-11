@@ -77,7 +77,8 @@ public class AnalyzeInputUtils {
           int nTokenStart = nOffsetLine;
           int nTokenEnd = nOffsetLine + strToken.length();
 
-          lstTokenOffsets.add(nTokenStart, nTokenEnd);
+          lstTokenOffsets.add(nTokenStart);
+          lstTokenOffsets.add(nTokenEnd);
           nOffsetLine += strToken.length() + 1;
       }
     }
