@@ -66,6 +66,7 @@ public class DocumentProcessor {
     JCas jcas = cas.getJCas();
     d.addSettingstoJcas(jcas);
     try {
+      System.out.println(String.format("**** Document text ****\n%s", d.getText()));
       jcas.setDocumentText(d.getText());
       result = process(jcas);
     } catch (Exception e) {
