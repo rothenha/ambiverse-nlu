@@ -15,7 +15,7 @@ services:
       DATABASE_NAME: aida_20180120_cs_de_en_es_ru_zh_v18
 
   nlu:
-    image: localhost:50000/ambiverse-nlu-local
+    image: localhost:50000/ambiverse-nlu-local:latest
     restart: always
     depends_on:
       - db
